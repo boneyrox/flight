@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../logo.png';
 import {Country,val} from './Countries/Country';
+import Button from 'react-bootstrap/Button'
 
 
 
@@ -34,22 +35,21 @@ function Search() {
     </div>
       </div>
   </div> */}
-<div class="container" id="navBar">
-    <div class="rowLogo">
-        <div class="col-sm-offset-0 col-sm-5"><img src={logo} alt="logo"/></div>
+<div className="container-fluid" id="navBar">
+    <div className="row" id="rowLogo">
+        <div className="col-sm"><img src={logo} alt="logo"/></div>
     </div>
-    <div class="heading">
-        <div class="col-sm-offset-0 col-sm-12"><h1>Book your flight with ease...</h1></div>
-        <div class="col-sm-2"><label >One-way</label></div>
-        <div class="col-sm-2"><label >Single</label></div>
-        <div class="col-sm-2"><Country/>{console.log(val)}</div>
-        <div class="col-sm-offset-0 col-sm-6"></div>
-        <div class="col-sm-offset-0 col-sm-2" id="s1"><SearchBox/></div>
-        <div class="col-sm-offset-0 col-sm-1"></div>
-        <div class="col-sm-2" id="s2"><SearchBox/></div>
-        <div class="col-sm-2"></div>
-        <div class="col-sm-offset-0 col-sm-2"></div>
-        <div class="col-sm-offset-0 col-sm-2"></div>
+    <div className="row" id="heading">
+        <div className="col-sm-offset-0 col-sm-12"><h1>Book your flight with ease...</h1></div>
+        
+        {/* <div className="col-sm-offset-0 col-sm-6"></div> */}
+        <div className="col-sm" id="s1"><label style={{margin:"1vh"}}>Origin</label><SearchBox/></div>
+        
+        <div className="col-sm" id="s2"><label style={{margin:"1vh"}}>Destination</label><SearchBox/></div>
+        
+        <div className="col-sm"><label style={{margin:"1vh"}}>Departure</label><DatePicker  selected={startDate} inputStyle={styles} onChange={date => setStartDate(date)} /> </div>
+        <div className="col-sm"><label style={{margin:"1vh"}}>Arrival</label><DatePicker selected={startDate} inputStyle={styles} onChange={date => setStartDate(date)} /> </div>
+        <div className="col-sm-1"><Button variant="warning">Search</Button>{' '}</div>
     </div>
 </div>
 

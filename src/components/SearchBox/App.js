@@ -145,14 +145,15 @@ function App(props){
     // const { value, suggestions } = this.state;
     const inputProps = {
       placeholder: props.placeholder,
-      value,
+      value:value,
       onChange: onChange,
     style:styles}
     
 
     return (
    
-          <Autosuggest 
+         <div id="parent">
+              <Autosuggest 
         suggestions={suggestions}
         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
         onSuggestionsClearRequested={onSuggestionsClearRequested}
@@ -161,6 +162,7 @@ function App(props){
         onSuggestionSelected={onSuggestionSelected}
         inputProps={inputProps} 
       />
+         </div>
    
     );
   }

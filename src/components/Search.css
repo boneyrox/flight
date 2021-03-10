@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap');
 
-.heading{
+#heading{
     height: 50vh;
   
     
@@ -14,7 +14,7 @@
       align-items: flex-start;
 }
 
-.rowLogo{
+#rowLogo{
     /* display: flex;
     flex-flow: column;
     justify-items: center;
@@ -26,13 +26,13 @@
     flex-direction: row;
     
 }
-.rowLogo img{
+#rowLogo img{
     height: 8vh;
     display: flex;
     justify-items: flex-start;
     
 }
-.heading h1{
+#heading h1{
     font-family: 'Poppins',
     sans-serif;
     
