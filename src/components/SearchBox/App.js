@@ -1,171 +1,166 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import Autosuggest from 'react-bootstrap-autosuggest';
 import './app.css';
 
 
-const styles={
-    height:"5vh",
-    padding:"1vh",
-    width:"20vw",
-    margin:"2vw",
-    display:"flex",
-    flexDirection:"row"
-   
+const styles = {
+    height: "5vh",
+    padding: "1vh",
+    width: "20vw",
+    margin: "2vw",
+    display: "flex",
+    flexDirection: "row"
+
 }
 
 
-const languages = [
-  {
-    name: 'C',
-    year: 1972
-  },
-  {
-    name: 'C#',
-    year: 2000
-  },
-  {
-    name: 'C++',
-    year: 1983
-  },
-  {
-    name: 'Clojure',
-    year: 2007
-  },
-  {
-    name: 'Elm',
-    year: 2012
-  },
-  {
-    name: 'Go',
-    year: 2009
-  },
-  {
-    name: 'Haskell',
-    year: 1990
-  },
-  {
-    name: 'Java',
-    year: 1995
-  },
-  {
-    name: 'Javascript',
-    year: 1995
-  },
-  {
-    name: 'Perl',
-    year: 1987
-  },
-  {
-    name: 'PHP',
-    year: 1995
-  },
-  {
-    name: 'Python',
-    year: 1991
-  },
-  {
-    name: 'Ruby',
-    year: 1995
-  },
-  {
-    name: 'Scala',
-    year: 2003
-  }
-];
-
-// https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions#Using_Special_Characters
-const escapeRegexCharacters = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-const getSuggestions = value => {
-  const escapedValue = escapeRegexCharacters(value.trim());
-  
-  if (escapedValue === '') {
-    return [];
-  }
-
-  const regex = new RegExp('^' + escapedValue, 'i');
-  const suggestions = languages.filter(language => regex.test(language.name));
-  
-  if (suggestions.length === 0) {
-    return [
-      { isAddNew: true }
-    ];
-  }
-  
-  return suggestions;
-}
-
-function App(props){
-    
- 
-    const[value,setValue]=useState('');
-    const[suggestions,setSuggestions]=useState([]);
-
-    
-
-  const onChange = (event, { newValue, method }) => {
-    setValue(newValue);
-  };
-
-  const getSuggestionValue = suggestion => {
-    if (suggestion.isAddNew) {
-      return value;
+const cities = [
+    {
+      PlaceId: 'MAN-sky',
+      PlaceName: 'Manchester',     
+      CountryId: 'UK-sky',
+      RegionId: '',
+      CityId: 'MANC-sky',
+      CountryName: 'United Kingdom'
+    },
+    {
+      PlaceId: 'LOND-sky',
+      PlaceName: 'London',
+      CountryId: 'UK-sky',
+      RegionId: '',
+      CityId: 'LOND-sky',
+      CountryName: 'United Kingdom'
+    },
+    {
+      PlaceId: 'LHR-sky',
+      PlaceName: 'London Heathrow',
+      CountryId: 'UK-sky',
+      RegionId: '',
+      CityId: 'LOND-sky',
+      CountryName: 'United Kingdom'
+    },
+    {
+      PlaceId: 'LGW-sky',
+      PlaceName: 'London Gatwick',
+      CountryId: 'UK-sky',
+      RegionId: '',
+      CityId: 'LOND-sky',
+      CountryName: 'United Kingdom'
+    },
+    {
+      PlaceId: 'STN-sky',
+      PlaceName: 'London Stansted',
+      CountryId: 'UK-sky',
+      RegionId: '',
+      CityId: 'LOND-sky',
+      CountryName: 'United Kingdom'
+    },
+    {
+      PlaceId: 'LTN-sky',
+      PlaceName: 'London Luton',
+      CountryId: 'UK-sky',
+      RegionId: '',
+      CityId: 'LOND-sky',
+      CountryName: 'United Kingdom'
+    },
+    {
+      PlaceId: 'LCY-sky',
+      PlaceName: 'London City',
+      CountryId: 'UK-sky',
+      RegionId: '',
+      CityId: 'LOND-sky',
+      CountryName: 'United Kingdom'
+    },
+    {
+      PlaceId: 'SEN-sky',
+      PlaceName: 'London Southend',
+      CountryId: 'UK-sky',
+      RegionId: '',
+      CityId: 'LOND-sky',
+      CountryName: 'United Kingdom'
+    },
+    {
+      PlaceId: 'BHX-sky',
+      PlaceName: 'Birmingham',
+      CountryId: 'UK-sky',
+      RegionId: '',
+      CityId: 'BIRM-sky',
+      CountryName: 'United Kingdom'
+    },
+    {
+      PlaceId: 'EDI-sky',
+      PlaceName: 'Edinburgh',
+      CountryId: 'UK-sky',
+      RegionId: '',
+      CityId: 'EDIN-sky',
+      CountryName: 'United Kingdom'
     }
-    
-    return suggestion.name;
-  };
+  ];
 
-  const renderSuggestion = suggestion => {
-    if (suggestion.isAddNew) {
-      return (
-        <span>
-          [+] Add new: <strong>{this.state.value}</strong>
-        </span>
-      );
-    }
 
-    return suggestion.name;
-  };
-  
-  const onSuggestionsFetchRequested = ({ value }) => {
-    setSuggestions(getSuggestions(value));
-  };
+const App = (props) => {
+  const [display, setDisplay] = useState(false);
+  const [options, setOptions] = useState(cities);
+  const [search, setSearch] = useState("");
+  const wrapperRef = useRef(null);
 
-  const onSuggestionsClearRequested = () => {
-    setSuggestions( []);
-  };
 
-  const onSuggestionSelected = (event, { suggestion }) => {
-    if (suggestion.isAddNew) {
-      console.log('Add new:', value);
+
+  useEffect(() => {
+    window.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      window.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
+
+  const handleClickOutside = event => {
+    const { current: wrap } = wrapperRef;
+    if (wrap && !wrap.contains(event.target)) {
+      setDisplay(false);
     }
   };
 
+  const updateSearch = value => {
+    setSearch(value);
+    setDisplay(false);
+  };
+  if(props.id==1){
+      props.setOrigin(search)
+  }
+  else{
+      props.setDest(search)
+  }
 
-    // const { value, suggestions } = this.state;
-    const inputProps = {
-      placeholder: props.placeholder,
-      value:value,
-      onChange: onChange,
-    style:styles}
-    
-
-    return (
-   
-         <div id="parent">
-              <Autosuggest 
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        onSuggestionSelected={onSuggestionSelected}
-        inputProps={inputProps} 
+  return (
+    <div ref={wrapperRef} className="flex-container flex-column pos-rel">
+      <input
+        id="auto"
+        onClick={() => setDisplay(!display)}
+        placeholder={props.placeholder}
+        value={search}
+        onChange={event => setSearch(event.target.value)}
       />
-         </div>
-   
-    );
-  }
-
+      {display && (
+        <div className="autoContainer">
+          {options
+            .filter(({ PlaceName }) => PlaceName.indexOf(search.toLowerCase()) > -1)
+            .map((value, i) => {
+              return (
+                <div
+                  onClick={() => updateSearch(value.PlaceId)}
+                  className="option"
+                  key={i}
+                  tabIndex="0"
+                >
+                  <span>{value.PlaceName}</span>
+              <p>{value.PlaceId}</p>
+                </div>
+              );
+            })}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default App;
