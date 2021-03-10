@@ -1,0 +1,15 @@
+#parents{
+    display: flex;
+    justify-content: center;
+    height: 6vh;
+    padding: 2vh;
+    box-shadow: 0 10px 6px -6px #777;
+    margin: 2vh;
+    position: relative;
+    
+}
+#parents img{
+    height: 7vh;
+    justify-self: center;
+    position: relative;
+}
