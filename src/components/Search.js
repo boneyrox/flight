@@ -35,7 +35,9 @@ function Search() {
     function setDest(value){
         setDestCity(value);
     }
-
+    function doIt(){
+        
+    }
 
     console.log("Origin",originCity);
     console.log("Dest",destCity)
@@ -58,11 +60,11 @@ function Search() {
         
         <div className="col-sm"><label style={{margin:"1vh"}}>Departure</label><DatePicker  dateFormat="yyyy-MM-dd"  selected={startDate} inputStyle={styles} onChange={date => setStartDate(date)} /> </div>
         {/* <div className="col-sm"><label style={{margin:"1vh"}}>Arrival</label><DatePicker selected={startDate} inputStyle={styles} onChange={date => setStartDate(date)} /> </div> */}
-        <div className="col-sm-1"><Button variant="warning">Search</Button>{' '}</div>
+        <div className="col-sm-1"><Button variant="warning" onClick={doIt} >Search</Button>{' '}</div>
     </div>
 </div>
-{/* <Result origin={originCity} dest={destCity} date={startDate} /> */}
-<Result origin='BOM-sky' destination='AMD-sky' date={startDate.toISOString()}/>
+<Result origin={originCity} destination={destCity} date={startDate.toISOString()} />
+
 
   
   </>

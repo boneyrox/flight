@@ -123,8 +123,9 @@ const App = (props) => {
   const updateSearch = value => {
     setSearch(value);
     setDisplay(false);
+ 
   };
-  if(props.id==1){
+     if(props.id==1){
       props.setOrigin(search)
   }
   else{
