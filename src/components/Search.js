@@ -64,6 +64,7 @@ function Search() {
     </div>
     <div className="row" id="heading">
         <div className="col-sm-offset-0 col-sm-12"><h1>Book your flight with ease...</h1></div>
+        <div className="w-100"></div>
         
         {/* <div className="col-sm-offset-0 col-sm-6"></div> */}
         <div className="col-sm" id="s1"><label style={{margin:"1vh"}}>Origin</label><SearchBox id="1" value={originCity} setOrigin={setOrigin} placeholder="Enter origin city"/></div>
