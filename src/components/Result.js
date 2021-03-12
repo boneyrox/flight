@@ -46,7 +46,11 @@ function Result(props) {
             'x-rapidapi-host': 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com'
         }
     };
-        axios.request(options).then(function (response) {
+        
+        
+    
+     useEffect(async () => {
+    const result = await axios.request(options).then(function (response) {
         console.log(response.data);
         setDataInputs(response.data);
         console.log("datainputs",dataInputs.Quotes[0].MinPrice);
@@ -55,13 +59,11 @@ function Result(props) {
     }).catch(function (error) {
         console.error(error);
     });
-        
+ 
     
-   
+  },[options]);
 
-    function ShowPrice(props){
-        return (<h1>Min Price:{props.price}</h1>);
-    }
+   
 
 
 return (<>

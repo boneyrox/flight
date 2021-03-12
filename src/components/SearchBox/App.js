@@ -106,32 +106,23 @@ const App = (props) => {
 
 
 
-  useEffect(() => {
-    window.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      window.removeEventListener("mousedown", handleClickOutside);
-    };
-  });
 
-  const handleClickOutside = event => {
-    const { current: wrap } = wrapperRef;
-    if (wrap && !wrap.contains(event.target)) {
-      setDisplay(false);
-    }
-  };
+ 
 
   const updateSearch = value => {
     setSearch(value);
     setDisplay(false);
+   
   
  
   };
-       if(props.id==1){
+   if(props.id==1){
       props.setOrigin(search)
   }
   else{
       props.setDest(search)
   }
+       
 
   return (
     <div ref={wrapperRef} className="flex-container flex-column pos-rel">

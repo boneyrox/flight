@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../logo.png';
 import Result from './Result';
+import React from 'react';
 
 import Button from 'react-bootstrap/Button'
 
@@ -27,7 +28,9 @@ function Search() {
     const [originCity, setOriginCity] = useState('');
     const [destCity, setDestCity] = useState('');
 
-
+    const [fromCity,setFromCity]=useState('');
+    const [toCity,setToCity]=useState('');
+    const [travelDate,setTravelDate]=useState('');
     function setOrigin(value){
         setOriginCity(value);
     }
@@ -35,14 +38,23 @@ function Search() {
     function setDest(value){
         setDestCity(value);
     }
-    function doIt(){
-        
+    const doIt=()=>{
+        setFromCity(originCity);
+        setToCity(destCity);
+        setTravelDate(startDate.toISOString());
+        console.log('called');
+
     }
 
-    console.log("Origin",originCity);
-    console.log("Dest",destCity)
-    console.log("startdate",startDate.toISOString());
-    
+    console.log("Origin",fromCity);
+    console.log("Dest",toCity)
+    console.log("startdate",travelDate);
+
+
+    const ChildResult=({fromCity,toCity,travelDate})=>(
+        <Result origin={fromCity} destination={toCity} date={travelDate} />
+    )
+    const MemoChild=React.memo(ChildResult);
   return (<>
 
   
@@ -63,8 +75,8 @@ function Search() {
         <div className="col-sm-1"><Button variant="warning" onClick={doIt} >Search</Button>{' '}</div>
     </div>
 </div>
-<Result origin={originCity} destination={destCity} date={startDate.toISOString()} />
 
+<MemoChild fromCity={fromCity} toCity={toCity} travelDate={travelDate}/>
 
   
   </>
